@@ -25,11 +25,12 @@ if os.getenv("CQLENG_ALLOW_SCHEMA_MANAGEMENT") is None:
 # This class is where we define our settings and specify where the values should come from. It uses BaseSettings from Pydantic, which helps in managing these settings with type validation. Each attribute of the Settings class maps to an environment variable, making sure they are pulled in from the system/environment, and ensuring they are correctly validated.
 
 class Settings(BaseSettings):
-    project_name: str = Field(..., env="PROJECT_NAME")
-    astra_db_client_id: str = Field(..., env="ASTRA_DB_CLIENT_ID")
-    astra_db_client_secret: str = Field(..., env="ASTRA_DB_CLIENT_SECRET")
-    astra_db_app_token: str = Field(..., env="ASTRA_DB_APP_TOKEN")
-    cqleng_allow_schema_management: str = Field(..., env="CQLENG_ALLOW_SCHEMA_MANAGEMENT")
+    class Settings(BaseSettings):
+        project_name: str = Field(..., env="PROJECT_NAME")
+        db_client_id: str = Field(..., env="ASTRA_DB_CLIENT_ID")
+        db_client_secret: str = Field(..., env="ASTRA_DB_CLIENT_SECRET")
+        db_app_token: str = Field(..., env="ASTRA_DB_APP_TOKEN")
+        cqleng_allow_schema_management: str = Field(..., env="CQLENG_ALLOW_SCHEMA_MANAGEMENT")
 
     class Config:
         env_file = ".env"
