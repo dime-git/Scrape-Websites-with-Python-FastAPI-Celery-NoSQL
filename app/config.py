@@ -34,10 +34,12 @@ class Settings(BaseSettings):
 
     class Config:
         env_file = ".env"
+        extra = "allow"  
 
 
 ##CACHING
 # We use lru_cache() to ensure that the settings are loaded only once and reused whenever needed, which is more efficient than loading them multiple times.
 @lru_cache
 def get_settings():
-    return Settings()
+    settings = Settings()
+    return settings
